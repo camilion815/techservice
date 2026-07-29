@@ -1,5 +1,5 @@
 
-# TechService - Lenilton Jr
+# TechService - Mário Fortunato
 
 ## Sistema de Gestão de Assistência Técnica
 
