@@ -6,7 +6,7 @@ def inserir(cliente):
 
     sql = """
         INSERT INTO clientes (nome, email, telefone, codigo_postal)
-        VALUES (%s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s)
     """
     valores = (cliente.nome, cliente.email, cliente.telefone, cliente.codigo_postal)
 
@@ -36,6 +36,66 @@ def listar():
     cursor.close()
     conexao.close()
     return clientes
+
+def buscar_por_nome(nome):
+    conexao = conectar()
+    cursor = conexao.cursor(dictionary=True)
+
+    sql = """
+        SELECT id_cliente, nome, email, telefone, codigo_postal, status,
+               created_at, updated_at, deleted_at
+        FROM clientes
+        WHERE nome LIKE %s AND status = 1
+        ORDER BY id_cliente
+    """
+    valores = (f"%{nome}%",)
+
+    cursor.execute(sql, valores)
+    clientes = cursor.fetchall()
+
+    cursor.close()
+    conexao.close()
+    return clientes
+
+def buscar_por_email(email):
+    conexao = conectar()
+    cursor = conexao.cursor(dictionary=True)
+
+    sql = """
+        SELECT id_cliente, nome, email, telefone, codigo_postal, status,
+               created_at, updated_at, deleted_at
+        FROM clientes
+        WHERE email = %s AND status = 1
+    """
+    valores = (email,)
+
+    cursor.execute(sql, valores)
+    cliente = cursor.fetchone()
+
+    cursor.close()
+    conexao.close()
+    return cliente
+
+def buscar_por_codigo_postal(codigo_postal):
+    conexao = conectar()
+    cursor = conexao.cursor(dictionary=True)
+
+    sql = """
+        SELECT id_cliente, nome, email, telefone, codigo_postal, status,
+               created_at, updated_at, deleted_at
+        FROM clientes
+        WHERE codigo_postal = %s AND status = 1
+    """
+    valores = (codigo_postal,)
+
+    cursor.execute(sql, valores)
+    cliente = cursor.fetchone()
+
+    cursor.close()
+    conexao.close()
+    return cliente
+
+
 
 def atualizar(cliente):
     conexao = conectar()
@@ -76,3 +136,4 @@ def excluir(id_cliente):
 
     cursor.close()
     conexao.close()
+
