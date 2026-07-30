@@ -111,7 +111,7 @@ def excluir(id_equipamento):
           AND status = 1
     """
 
-    cursor.execute(sql, (id_cliente,))
+    cursor.execute(sql, (id_equipamento,))
     conexao.commit()
 
     cursor.close()
