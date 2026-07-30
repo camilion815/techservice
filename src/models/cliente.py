@@ -13,5 +13,5 @@ class Cliente:
         self.nome = nome
         self.email = email
         self.telefone = telefone
-        self.status = codigo_postal
+        self.codigo_postal = codigo_postal
         self.status = status
