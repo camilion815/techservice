@@ -23,6 +23,7 @@ CREATE TABLE equipamento (
     nome VARCHAR(100) NOT NULL,
     tipo VARCHAR(50) NOT NULL,
     descricao TEXT,
+    status TINYINT NOT NULL DEFAULT 1,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NULL,
     deleted_at DATETIME NULL
