@@ -1,6 +1,6 @@
 from src.repositories.cliente_repository import listar
 from src.repositories.cliente_repository import buscar_por_nome, buscar_por_email, buscar_por_codigo_postal
-from src.repositories.equipamento_repository import listar as listar_equipamentos
+from src.repositories.equipamento_repository import listar_equipamentos, buscar_por_nome, buscar_por_tipo
 
 
 def main():
