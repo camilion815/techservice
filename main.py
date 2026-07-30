@@ -1,5 +1,6 @@
 from src.repositories.cliente_repository import listar
 from src.repositories.cliente_repository import buscar_por_nome, buscar_por_email, buscar_por_codigo_postal
+from src.repositories.equipamento_repository import listar as listar_equipamentos
 
 
 def main():
@@ -20,7 +21,7 @@ def main():
         
     print("\nEquipamentos ativos:")
 
-    equipamento = listar()
+    equipamento = listar_equipamentos()
 
     for item in equipamento:
         print(
