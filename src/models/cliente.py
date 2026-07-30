@@ -5,6 +5,7 @@ class Cliente:
         nome,
         email,
         telefone="",
+        codigo_postal="",
         id_cliente=None,
         status=1
     ):
@@ -12,4 +13,5 @@ class Cliente:
         self.nome = nome
         self.email = email
         self.telefone = telefone
+        self.status = codigo_postal
         self.status = status

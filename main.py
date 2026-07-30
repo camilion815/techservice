@@ -13,7 +13,8 @@ def main():
             item["id_cliente"],
             item["nome"],
             item["email"],
-            item["telefone"]
+            item["telefone"],
+            item["codigo_postal"]
         )
 
 

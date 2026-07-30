@@ -7,7 +7,8 @@ def main():
     cliente = Cliente(
         nome="Cliente Teste",
         email="teste@email.pt",
-        telefone="910000000"
+        telefone="910000000",
+        codigo_postal="0000-000"
     )
 
     cliente = inserir(cliente)
@@ -15,7 +16,7 @@ def main():
 
     print("\nClientes ativos:")
     for item in listar():
-        print(item["id_cliente"], item["nome"], item["email"], item["telefone"])
+        print(item["id_cliente"], item["nome"], item["email"], item["telefone"], item["codigo_postal"])
 
 if __name__ == "__main__":
     main()
