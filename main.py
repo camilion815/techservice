@@ -1,6 +1,5 @@
-from src.repositories.cliente_repository import listar
-from src.repositories.cliente_repository import buscar_por_nome, buscar_por_email, buscar_por_codigo_postal
-from src.repositories.equipamento_repository import listar_equipamentos, buscar_por_nome, buscar_por_tipo
+from src.repositories.cliente_repository import listar as listar_clientes, buscar_por_nome, buscar_por_email, buscar_por_codigo_postal
+from src.repositories.equipamento_repository import listar as listar_equipamentos, buscar_por_nome, buscar_por_tipo
 
 
 def main():
@@ -8,7 +7,7 @@ def main():
 
     print("\nClientes ativos:")
 
-    clientes = listar()
+    clientes = listar_clientes()
 
     for item in clientes:
         print(
