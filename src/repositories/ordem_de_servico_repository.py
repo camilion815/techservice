@@ -1,22 +1,30 @@
 from src.database.conexao import conectar
 from src.models import ordem_de_servico
 
-def inserir(ordem):
+def listar_ordens():
     conexao = conectar()
-    cursor = conexao.cursor()
+    cursor = conexao.cursor(dictionary=True)
 
     sql = """
-        INSERT INTO ordem_de_servico (cliente_id, equipamento_id, diagnostico, solucao, status, prioridade, custo_total)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        SELECT
+            id_ordem,
+            id_cliente,
+            id_equipamento,
+            diagnostico,
+            solucao,
+            status,
+            prioridade,
+            custo_total,
+            created_at,
+            updated_at
+        FROM ordem_de_servico
+        ORDER BY id_ordem;
     """
-    valores = (ordem.cliente_id, ordem.equipamento_id, ordem.diagnostico, ordem.solucao,
-               ordem.status, ordem.prioridade, ordem.custo_total)
 
-    cursor.execute(sql, valores)
-    conexao.commit()
-    ordem.id = cursor.lastrowid
+    cursor.execute(sql)
+    ordens = cursor.fetchall()
 
     cursor.close()
     conexao.close()
-    return ordem
 
+    return ordens

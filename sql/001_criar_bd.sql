@@ -32,6 +32,7 @@ CREATE TABLE equipamento (
 
 CREATE TABLE ordem_de_servico (
     id_ordem INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT NOT NULL,
     id_equipamento INT NOT NULL,
     diagnostico TEXT NOT NULL,
     solucao TEXT,
@@ -41,10 +42,13 @@ CREATE TABLE ordem_de_servico (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NULL,
     deleted_at DATETIME NULL,
-    FOREIGN KEY (id_equipamento) REFERENCES equipamento(id_equipamento)
+    FOREIGN KEY (id_equipamento) REFERENCES equipamento(id_equipamento),
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
 );
 
---cliente e equipamento de exemplo
+
+
+
 INSERT INTO clientes (
     nome,
     email,
@@ -70,3 +74,19 @@ VALUES (
     'Portátil simples.'
 );
 
+INSERT INTO ordem_de_servico (
+    id_cliente,
+    id_equipamento,
+    diagnostico,
+    solucao,
+    prioridade,
+    custo_total
+)
+VALUES (
+    1,
+    1,
+    'O laptop não liga.',
+    'Substituição da bateria.',
+    2,
+    150.00
+);

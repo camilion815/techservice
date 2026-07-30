@@ -1,5 +1,5 @@
 from src.database.conexao import conectar
-from src.models import cliente
+from src.models import equipamento
 
 def inserir(equipamento):
     conexao = conectar()
@@ -20,7 +20,7 @@ def inserir(equipamento):
     return equipamento
 
 
-def listar():
+def listar_equipamentos():
     conexao = conectar()
     cursor = conexao.cursor(dictionary=True)
 
@@ -70,7 +70,7 @@ def buscar_por_tipo(tipo):
     valores = (tipo,)
 
     cursor.execute(sql, valores)
-    equipamento = cursor.fetchone()
+    equipamento = cursor.fetchall()
 
     cursor.close()
     conexao.close()
