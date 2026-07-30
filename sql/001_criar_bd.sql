@@ -17,3 +17,13 @@ CREATE TABLE clientes (
     updated_at DATETIME NULL,
     deleted_at DATETIME NULL
 );
+
+CREATE TABLE equipamento (
+    id_equipamento INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    descricao TEXT,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NULL,
+    deleted_at DATETIME NULL
+);
