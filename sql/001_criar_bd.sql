@@ -28,3 +28,45 @@ CREATE TABLE equipamento (
     updated_at DATETIME NULL,
     deleted_at DATETIME NULL
 );
+
+
+CREATE TABLE ordem_de_servico (
+    id_ordem INT AUTO_INCREMENT PRIMARY KEY,
+    id_equipamento INT NOT NULL,
+    diagnostico TEXT NOT NULL,
+    solucao TEXT,
+    status TINYINT NOT NULL DEFAULT 1,
+    prioridade TINYINT NOT NULL DEFAULT 1,
+    custo_total DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NULL,
+    deleted_at DATETIME NULL,
+    FOREIGN KEY (id_equipamento) REFERENCES equipamento(id_equipamento)
+);
+
+--cliente e equipamento de exemplo
+INSERT INTO clientes (
+    nome,
+    email,
+    telefone,
+    codigo_postal
+)
+VALUES (
+    'Mário Fortunato',
+    'mario.fortunato@email.com',
+    '912345678',
+    '1000-001'
+);
+
+
+INSERT INTO equipamento (
+    nome,
+    tipo,
+    descricao
+)
+VALUES (
+    'Dell Inspiron 15',
+    'Laptop',
+    'Portátil simples.'
+);
+
