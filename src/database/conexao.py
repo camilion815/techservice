@@ -8,10 +8,13 @@ load_dotenv()
 
 
 def conectar():
-    return mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        port=int(os.getenv("DB_PORT", "3306")),
-        user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD", ""),
-        database=os.getenv("DB_NAME", "techservice_db")
+    conexao = mysql.connector.connect(
+        host="localhost",
+        port=3306,
+        user="root",
+        password="1234",
+        database="techservice_db"
     )
+    return conexao
+
+ 

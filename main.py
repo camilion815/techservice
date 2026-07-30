@@ -17,6 +17,21 @@ def main():
             item["telefone"],
             item["codigo_postal"]
         )
+        
+    print("\nEquipamentos ativos:")
+
+    equipamento = listar()
+
+    for item in equipamento:
+        print(
+            item["id_equipamento"],
+            item["nome"],
+            item["tipo"],
+            item["descricao"]
+        )
+        
+
+
 
 
 if __name__ == "__main__":
