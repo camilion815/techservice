@@ -10,7 +10,7 @@ def listar(cliente):
             nome,
             email,
             telefone,
-            endereco,
+            codigo_postal,
             created_at,
             updated_at
         FROM clientes
@@ -29,14 +29,14 @@ def criar(cliente):
     cursor = conexao.cursor()
 
     sql = """
-        INSERT INTO clientes (nome, email, telefone, endereco)
+        INSERT INTO clientes (nome, email, telefone, codigo_postal)
         VALUES (%s, %s, %s, %s)
     """
     valores = (
         cliente.nome,
         cliente.email,
         cliente.telefone,
-        cliente.endereco
+        cliente.codigo_postal
     )
 
     cursor.execute(sql, valores)
@@ -53,14 +53,14 @@ def atualizar(cliente):
 
     sql = """
         UPDATE clientes
-        SET nome = %s, email = %s, telefone = %s, endereco = %s
+        SET nome = %s, email = %s, telefone = %s, codigo_postal = %s
         WHERE id_cliente = %s
     """
     valores = (
         cliente.nome,
         cliente.email,
         cliente.telefone,
-        cliente.endereco,
+        cliente.codigo_postal,
         cliente.id_cliente
     )
 
