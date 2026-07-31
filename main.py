@@ -130,7 +130,19 @@ def menu_equipamentos():
             
         elif op == "3":
             print("Pedir ID e restantes campos...")
-            # equipamento_repo.atualizar(...)
+            id_eq = int(input("ID: "))
+            nome = input("Nome: ")
+            tipo = input("Tipo: ")
+            descricao = input("Descrição: ")
+            
+            equipamento = Equipamento(
+                id_equipamento=id_eq,
+                nome=nome,
+                tipo=tipo,
+                descricao=descricao,
+            )
+            equipamento_repo.atualizar(equipamento)
+            
 
         elif op == "4":
             id_eq = int(input("ID: "))
@@ -158,11 +170,48 @@ def menu_ordens():
 
         elif op == "2":
             print("Pedir todos os campos...")
-            # ordem_repo.criar(...)
+            id_cliente = int(input("ID do cliente: "))
+            id_equipamento = int(input("ID do equipamento: "))
+            diagnostico = input("Diagnóstico: ")
+            solucao = input("Solução: ")
+            status = input("Status: ")
+            prioridade = input("Prioridade: ")
+            custo_total = float(input("Custo total: "))
+
+            ordem = ordem_de_servico(
+                id_cliente=id_cliente,
+                id_equipamento=id_equipamento,
+                diagnostico=diagnostico,
+                solucao=solucao,
+                status=status,
+                prioridade=prioridade,
+                custo_total=custo_total
+            )
+
+            ordem_repo.criar(ordem)
 
         elif op == "3":
             print("Pedir ID e restantes campos...")
-            # ordem_repo.atualizar(...)
+            id_ordem = int(input("ID da ordem: "))
+            id_cliente = int(input("ID do cliente: "))
+            id_equipamento = int(input("ID do equipamento: "))
+            diagnostico = input("Diagnóstico: ")
+            solucao = input("Solução: ")
+            status = input("Status: ")
+            prioridade = input("Prioridade: ")
+            custo_total = float(input("Custo total: "))
+            
+            ordem = ordem_de_servico(
+                id=id_ordem,
+                cliente_id=id_cliente,
+                equipamento_id=id_equipamento,
+                diagnostico=diagnostico,
+                solucao=solucao,
+                status=status,
+                prioridade=prioridade,
+                custo_total=custo_total
+            )
+            ordem_repo.atualizar(ordem)
 
         elif op == "4":
             id_ordem = int(input("ID da ordem: "))
