@@ -1,75 +1,185 @@
+from src.models.cliente import Cliente
+from src.models.equipamento import Equipamento
+from src.models.ordem_de_servico import ordem_de_servico
+
 from src.repositories import cliente_repository as cliente_repo
 from src.repositories import equipamento_repository as equipamento_repo
 from src.repositories import ordem_de_servico_repository as ordem_repo
 
 
-REPOSITORIOS = {
-    "1": ("Cliente", cliente_repo),
-    "2": ("Equipamento", equipamento_repo),
-    "3": ("Ordem de Serviço", ordem_repo),
-}
-
-
-def menu_crud(nome, repo):
-    while True:
-        print(f"\n===== {nome.upper()} =====")
-        print("1 - Listar")
-        print("2 - Criar")
-        print("3 - Atualizar")
-        print("4 - Deletar")
-        print("0 - Voltar")
-
-        opcao = input("Escolha uma opção: ")
-
-        if opcao == "1":
-            try:
-                resultado = repo.listar(None)
-                if resultado:
-                    for item in resultado:
-                        print(f"\n{item}")
-                else:
-                    print("Nenhum registo encontrado.")
-            except Exception as e:
-                print(f"Erro: {e}")
-
-        elif opcao == "2":
-            print("\nA criação é efetuada pelo método:")
-            print(f"{repo.__name__}.criar(objeto)")
-
-        elif opcao == "3":
-            print("\nA atualização é efetuada pelo método:")
-            print(f"{repo.__name__}.atualizar(objeto)")
-
-        elif opcao == "4":
-            print("\nA eliminação é efetuada pelo método:")
-            print(f"{repo.__name__}.deletar(...)")
-
-        elif opcao == "0":
-            break
-
-        else:
-            print("Opção inválida.")
-
-
 def menu_principal():
     while True:
-        print("\n========== TECHSERVICE ==========")
+        print("\n===== MENU =====")
         print("1 - Clientes")
         print("2 - Equipamentos")
         print("3 - Ordens de Serviço")
         print("0 - Sair")
 
-        opcao = input("Escolha uma opção: ")
+        opcao = input("Escolha: ")
 
-        if opcao == "0":
-            print("Programa terminado.")
+        if opcao == "1":
+            menu_clientes()
+        elif opcao == "2":
+            menu_equipamentos()
+        elif opcao == "3":
+            menu_ordens()
+        elif opcao == "0":
             break
-
-        if opcao in REPOSITORIOS:
-            nome, repo = REPOSITORIOS[opcao]
-            menu_crud(nome, repo)
         else:
             print("Opção inválida.")
+
+
+
+def menu_clientes():
+    while True:
+        print("\n--- CLIENTES ---")
+        print("1 - Listar")
+        print("2 - Adicionar")
+        print("3 - Atualizar")
+        print("4 - Eliminar")
+        print("0 - Voltar")
+
+        op = input("Escolha: ")
+
+        if op == "1":
+            clientes = cliente_repo.listar(None)
+            for c in clientes:
+                print(c)
+
+        elif op == "2":
+            nome = input("Nome: ")
+            email = input("Email: ")
+            telefone = input("Telefone: ")
+            codigo = input("Código Postal: ")
+
+            cliente = Cliente(
+                nome=nome,
+                email=email,
+                telefone=telefone,
+                codigo_postal=codigo
+            )
+
+            cliente_repo.criar(cliente)
+            print("Cliente criado.")
+
+        elif op == "3":
+            id_cliente = int(input("ID do cliente: "))
+            nome = input("Nome: ")
+            email = input("Email: ")
+            telefone = input("Telefone: ")
+            codigo = input("Código Postal: ")
+
+            cliente = Cliente(
+                id_cliente=id_cliente,
+                nome=nome,
+                email=email,
+                telefone=telefone,
+                codigo_postal=codigo
+            )
+
+            cliente_repo.atualizar(cliente)
+            print("Cliente atualizado.")
+
+        elif op == "4":
+            id_cliente = int(input("ID do cliente: "))
+
+            cliente = Cliente(
+                id_cliente=id_cliente,
+                nome="",
+                email=""
+            )
+
+            cliente_repo.deletar(cliente)
+            print("Cliente eliminado.")
+
+        elif op == "0":
+            break
+
+
+
+def menu_equipamentos():
+    while True:
+        print("\n--- EQUIPAMENTOS ---")
+        print("1 - Listar")
+        print("2 - Adicionar")
+        print("3 - Atualizar")
+        print("4 - Eliminar")
+        print("0 - Voltar")
+
+        op = input("Escolha: ")
+
+        if op == "1":
+            for e in equipamento_repo.listar(None):
+                print(e)
+
+        elif op == "2":
+            print("Pedir todos os campos...")
+            nome = input("Nome: ")
+            tipo = input("Tipo: ")
+            descricao = input("Descrição: ")
+            
+            
+            equipamento = Equipamento(
+                nome=nome,
+                tipo=tipo,
+                descricao=descricao,
+                
+            )
+            equipamento_repo.criar(equipamento)
+            
+            
+        elif op == "3":
+            print("Pedir ID e restantes campos...")
+            # equipamento_repo.atualizar(...)
+
+        elif op == "4":
+            id_eq = int(input("ID: "))
+            equipamento_repo.deletar(id_eq)
+
+        elif op == "0":
+            break
+
+
+
+def menu_ordens():
+    while True:
+        print("\n--- ORDENS DE SERVIÇO ---")
+        print("1 - Listar")
+        print("2 - Adicionar")
+        print("3 - Atualizar")
+        print("4 - Eliminar")
+        print("0 - Voltar")
+
+        op = input("Escolha: ")
+
+        if op == "1":
+            for ordem in ordem_repo.listar(None):
+                print(ordem)
+
+        elif op == "2":
+            print("Pedir todos os campos...")
+            # ordem_repo.criar(...)
+
+        elif op == "3":
+            print("Pedir ID e restantes campos...")
+            # ordem_repo.atualizar(...)
+
+        elif op == "4":
+            id_ordem = int(input("ID da ordem: "))
+            ordem = ordem_de_servico(
+                id=id_ordem,
+                cliente_id=None,
+                equipamento_id=None,
+                diagnostico="",
+                solucao="",
+                status="",
+                prioridade="",
+                custo_total=0
+            )
+            ordem_repo.deletar(ordem)
+
+        elif op == "0":
+            break
 
 
 def main():
