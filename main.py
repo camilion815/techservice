@@ -26,7 +26,7 @@ def menu_crud(nome, repo):
                 resultado = repo.listar(None)
                 if resultado:
                     for item in resultado:
-                        print(item)
+                        print(f"\n{item}")
                 else:
                     print("Nenhum registo encontrado.")
             except Exception as e:

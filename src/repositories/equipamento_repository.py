@@ -16,27 +16,27 @@ def listar(equipamento):
             status,
             created_at,
             updated_at
-        FROM equipamentos
+        FROM equipamento
         ORDER BY id_equipamento;
     """
 
     cursor.execute(sql)
-    equipamentos = cursor.fetchall()
+    equipamento = cursor.fetchall()
 
     cursor.close()
     conexao.close()
-    return equipamentos
+    return equipamento
 
 def criar(equipamento):
     conexao = conectar()
     cursor = conexao.cursor()
 
     sql = """
-        INSERT INTO equipamentos (id_cliente, tipo, marca, modelo, numero_serie, status)
+        INSERT INTO equipamento (id_equipamento, tipo, marca, modelo, numero_serie, status)
         VALUES (%s, %s, %s, %s, %s, %s)
     """
     valores = (
-        equipamento.id_cliente,
+        equipamento.id_equipamento,
         equipamento.tipo,
         equipamento.marca,
         equipamento.modelo,
@@ -57,8 +57,8 @@ def atualizar(equipamento):
     cursor = conexao.cursor()
 
     sql = """
-        UPDATE equipamentos
-        SET id_cliente = %s,
+        UPDATE equipamento
+        SET id_equipamento = %s,
             tipo = %s,
             marca = %s,
             modelo = %s,
@@ -68,7 +68,7 @@ def atualizar(equipamento):
         WHERE id_equipamento = %s
     """
     valores = (
-        equipamento.id_cliente,
+        equipamento.id_equipamento,
         equipamento.tipo,
         equipamento.marca,
         equipamento.modelo,
@@ -88,7 +88,7 @@ def deletar(id_equipamento):
     conexao = conectar()
     cursor = conexao.cursor()
 
-    sql = "DELETE FROM equipamentos WHERE id_equipamento = %s"
+    sql = "DELETE FROM equipamento WHERE id_equipamento = %s"
     cursor.execute(sql, (id_equipamento,))
     conexao.commit()
 
